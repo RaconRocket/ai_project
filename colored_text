@@ -1,0 +1,32 @@
+import cv2
+import numpy as np
+
+
+img = cv2.imread('C:/Users/mk4/PycharmProjects/ai_project/image/color_text.png')
+new_img = np.zeros_like(img, dtype='uint8')
+
+grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+blurred = cv2.GaussianBlur(grey, (3, 3), 0)
+can = cv2.Canny(blurred, 30, 30)
+
+contours, _ = cv2.findContours(can, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+layer_1 = []
+layer_2 = []
+layer_3 = []
+
+for contour in contours:
+    x, y, w, h = cv2.boundingRect(contour)
+    if y < img.shape[0] / 3.29:
+        layer_1.append(contour)
+    elif y < 2 * img.shape[0] / 3.3:
+        layer_2.append(contour)
+    else:
+        layer_3.append(contour)
+
+cv2.drawContours(new_img, layer_1, -1, (0, 225, 0), 1)
+cv2.drawContours(new_img, layer_2, -1, (255, 0, 0), 1)
+cv2.drawContours(new_img, layer_3, -1, (0, 0, 225), 1)
+
+cv2.imshow('I did it!', new_img)
+cv2.waitKey(0)
