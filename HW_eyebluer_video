@@ -1,1 +1,31 @@
+import cv2
+import numpy as np
 
+
+webcam = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # Для он-лайн камеры
+webcam.set(3, 600)
+webcam.set(4, 400)
+
+# cap = cv2.VideoCapture('videos/sample_for_eye_bluer.mp4')  # Для видеозаписи
+
+while True:
+    # _, img = cap.read()  # Для видеозаписи
+    _, img = webcam.read()  # Для он-лайн камеры
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    cascade = cv2.CascadeClassifier('C:/Users/mk4/PycharmProjects/ai_project/haarcascade_eye.xml')
+
+    eyes = cascade.detectMultiScale(gray, scaleFactor=3, minNeighbors=2)
+
+    for (x, y, w, h) in eyes:
+
+        bar = cv2.rectangle(img, (x, y), (x + w, y + h), (42, 69, 11, 0.5), thickness=cv2.FILLED)
+        # bar[y:y + h, x:x + w] = cv2.medianBlur(bar[y:y + h, x:x + w], 35)
+
+    cv2.imshow('Eye blured!', img)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+img.release()
+cv2.destroyAllWindows()
