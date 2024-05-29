@@ -6,7 +6,7 @@ webcam = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # Для он-лайн камеры
 webcam.set(3, 600)
 webcam.set(4, 400)
 
-# cap = cv2.VideoCapture('videos/sample_for_eye_bluer.mp4')  # Для видеозаписи
+# cap = cv2.VideoCapture('videos/sample_for_eye_blur.mp4')  # Для видеозаписи
 
 while True:
     # _, img = cap.read()  # Для видеозаписи
