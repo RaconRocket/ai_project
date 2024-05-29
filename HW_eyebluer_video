@@ -13,7 +13,7 @@ while True:
     _, img = webcam.read()  # Для он-лайн камеры
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    cascade = cv2.CascadeClassifier('C:/Users/mk4/PycharmProjects/ai_project/haarcascade_eye.xml')
+    cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 
     eyes = cascade.detectMultiScale(gray, scaleFactor=3, minNeighbors=2)
 
